@@ -20,8 +20,6 @@ int main()
             printf("Sum of all positive numbers entered : %d",sum);
             break;
         }
- }
-    
-    return 0;
-    
+ }    
+    return 0;    
 }
