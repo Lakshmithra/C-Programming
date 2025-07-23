@@ -68,9 +68,27 @@ int main(){
     
             fprintf(fw ,"%s\n",obj.habit_name );
     
-            obj.streak = 0;          // Initial streak is 0
-            fprintf(fw ,"%d\n",obj.streak);
-    
+            char response[5];
+            printf("\nEvery tick is a transformation. Every step, a statement.\n");
+
+            printf("\nDid you %s today ? (yes / no) ",obj.habit_name);
+            scanf("%s",response);
+
+            if(strcmp(response , "yes") == 0){
+                 obj.streak = 1;
+                 fprintf(fw ,"%d\n",obj.streak);
+                 printf("\nYour streak is %d.\nYou're officially unstoppable !\nKeep showing up champ !\nCome back tomorrow !\n",obj.streak);
+
+            }
+           else if(strcmp(response ,"no")==0){
+                  obj.streak = 0;
+                  fprintf(fw ,"%d\n",obj.streak);
+                  printf("\nEven warriors rest. Reset and reload !\nThe only bad workout is the one you didn't do !\nCome backs stronger tomorrow !\n");
+           }
+           else {
+                    printf("\nInvalid input. Please enter 'yes' or 'no'.\n");
+                }
+
             showdate(obj.stored_date , 15);    // Get current date
             fprintf(fw ,"%s\n",obj.stored_date);
     
@@ -127,12 +145,12 @@ int main(){
                         fseek(fr,streak_position, SEEK_SET);  // Go to streak position
         
                         obj.streak++;
-                        fprintf(fr, "%-3d", obj.streak);    // Update (overwrite) the streak in the file
+                        fprintf(fr, "%-3d\n", obj.streak);    // Update (overwrite) the streak in the file
         
                         fseek(fr , date_position ,SEEK_SET);   // Go to date position
         
                         strcpy(obj.stored_date , date);
-                        fprintf(fr , "%s" , obj.stored_date); // Update (overwrite) the date in the file
+                        fprintf(fr , "%s\n" , obj.stored_date); // Update (overwrite) the date in the file
         
                         printf("\nYour streak is %d.\nYou're officially unstoppable !\nKeep showing up champ !\nCome back tomorrow !\n",obj.streak);
                     }
@@ -142,11 +160,11 @@ int main(){
                         obj.streak = 0;   // Reset streak if habit not completed
         
                         fseek(fr, streak_position, SEEK_SET);
-                        fprintf(fr, "%-3d", obj.streak);
+                        fprintf(fr, "%-3d\n", obj.streak);
         
                         fseek(fr , date_position ,SEEK_SET);
                         strcpy(obj.stored_date , date);
-                        fprintf(fr , "%s" , obj.stored_date);
+                        fprintf(fr , "%s\n" , obj.stored_date);
         
                         printf("\nEven warriors rest. Reset and reload !\nThe only bad workout is the one you didn't do !\nCome backs stronger tomorrow !\n");
                     }
